@@ -1,7 +1,6 @@
 package com.ryanh.base;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -43,8 +42,12 @@ public abstract class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    protected Boolean waitUntilPageLoaded() {
-        return wait.until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+    protected void waitForPageURL(String url) {
+        wait.until(ExpectedConditions.urlToBe(url));
+    }
+
+    protected void waitForStaleElement(WebElement e) {
+        wait.until(ExpectedConditions.stalenessOf(e));
     }
 
     /**

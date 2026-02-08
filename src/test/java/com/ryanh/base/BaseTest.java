@@ -29,6 +29,7 @@ public abstract class BaseTest {
 
         homePage.navigateToLogin();
         loginPage.login(System.getenv("BATTLENET_EMAIL_TEST"), System.getenv("BATTLENET_PASSWORD_TEST"));
+        homePage.waitForPageLoad();
     }
 
     /**

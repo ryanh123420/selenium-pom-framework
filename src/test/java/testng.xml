@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MySuite">
+    <test name="MyTest">
+        <classes>
+            <class name="com.ryanh.tests.HomeTests" />
+            <!-- Add more classes as needed -->
+        </classes>
+    </test>
+    <!-- Add more tests or configurations here -->
+</suite>

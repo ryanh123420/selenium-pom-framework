@@ -1,13 +1,19 @@
 package com.ryanh.automate;
 
+import com.ryanh.components.BossCard;
 import com.ryanh.pages.HomePage;
 import com.ryanh.pages.LoginPage;
+import com.ryanh.pages.OverviewPage;
 import com.ryanh.utils.DriverFactory;
 import org.openqa.selenium.WebDriver;
+import java.lang.Thread;
+
+import java.lang.management.RuntimeMXBean;
+import java.util.List;
 
 
 public class RunWithoutTests {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         WebDriver driver = DriverFactory.createDriver(DriverFactory.BrowserTypes.CHROME);
 
         driver.get("https://wowutils.com/viserio-cooldowns");
@@ -17,5 +23,10 @@ public class RunWithoutTests {
 
         homePage.navigateToLogin();
         loginPage.login(System.getenv("BATTLENET_EMAIL_TEST"), System.getenv("BATTLENET_PASSWORD_TEST"));
+        homePage.waitForPageLoad();
+
+        OverviewPage overviewPage = new OverviewPage(driver);
+
+        driver.get("https://wowutils.com/viserio-cooldowns/raid/overview");
     }
 }

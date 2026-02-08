@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class BossCard extends BasePage {
+    //Root element where the card is located
     private final WebElement root;
 
     /**
@@ -23,11 +24,13 @@ public class BossCard extends BasePage {
      * Selectors for elements on a boss card that are only available when no notes are created.
      */
     //The add button that only appears when a boss has no notes created
-    private final By createANoteButton = By.xpath("//button[contains(text(), 'Create a note')]");
+    private final By createANoteButton = By.xpath(".//button[contains(text(), 'Create a note')]");
 
     /**
      * Selectors for elements on a boss card that are only available when at least one note is created.
      */
+    //The note tile containing the link to the note page, and all the buttons for note actions
+    private final By noteTile = By.cssSelector("div.grid div.box-border");
     //Edit note name button for created notes
     private final By editNoteNameButton = By.cssSelector("div.grid div.flex button[title=\"Edit note name\"]");
     //Text field that replaces the noteLink element when the editNoteNameButton is clicked
@@ -50,8 +53,13 @@ public class BossCard extends BasePage {
         return root.findElement(bossGuideLink).getText();
     }
 
+    public WebElement getRootElement() {
+        return root;
+    }
+
     public void addNote() {
         root.findElement(addNoteButton).click();
+        waitForStaleElement(root.findElement(addNoteButton));
     }
 
     public void createNote() {
@@ -64,6 +72,11 @@ public class BossCard extends BasePage {
 
     public void openBossGuide() {
         click(bossGuideLink);
+    }
+
+    public boolean isTilePresent() {
+        waitUntilVisible(noteTile);
+        return !root.findElements(noteTile).isEmpty();
     }
 
     public void editNote(String text) {
