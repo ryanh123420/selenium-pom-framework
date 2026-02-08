@@ -10,6 +10,7 @@ public class HomePage extends BasePage {
     private final By setupsPageButton = By.cssSelector("#tools a[href*='setups']");
     private final By battleNetLogin = By.xpath("//img[@alt='Battle.net']/ancestor::button");
 
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -24,5 +25,10 @@ public class HomePage extends BasePage {
 
     public void navigateToLogin() {
         click(battleNetLogin);
+    }
+
+    public void waitForPageLoad() {
+        String pageURL = "https://wowutils.com/viserio-cooldowns";
+        waitForPageURL(pageURL);
     }
 }

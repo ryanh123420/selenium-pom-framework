@@ -17,6 +17,7 @@ public class HomeTests extends BaseTest {
     @Test
     public void NavigateToOverview(){
         HomePage homePage = new HomePage(driver);
+        driver.get("https://wowutils.com/viserio-cooldowns");
 
         homePage.navigateToOverview();
         Assert.assertEquals(driver.getCurrentUrl(), "https://wowutils.com/viserio-cooldowns/raid/overview");

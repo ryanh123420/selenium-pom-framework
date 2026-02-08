@@ -42,6 +42,14 @@ public abstract class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    protected void waitForPageURL(String url) {
+        wait.until(ExpectedConditions.urlToBe(url));
+    }
+
+    protected void waitForStaleElement(WebElement e) {
+        wait.until(ExpectedConditions.stalenessOf(e));
+    }
+
     /**
      * Calls the WebElement.click() method, wrapped with a waiting strategy
      * @param element By locator for an element

@@ -20,8 +20,4 @@ public class LoginPage extends BasePage {
         type(passwordField, password);
         click(loginButton);
     }
-
-    public boolean isPageOpened() {
-        return driver.getCurrentUrl().contains("account.battle.net/login");
-    }
 }
