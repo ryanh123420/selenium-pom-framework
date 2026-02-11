@@ -1,6 +1,36 @@
-# Agency Auto Raid Setup
+# Selenium Automation Framework
 
-A Java Selenium framework with two goals in mind:
+A Java Selenium test automation framework for the WoWUtils raid management web application, built with Java, TestNG, and Maven using the Page Object Model design pattern.
 
-1) Practice designing and implementing a Selenium automation framework.
-2) Explore the use of Selenium as a tool for automating repetitive, non-test related workflows on the WoWUtils webapp.
+## Project Purpose
+1. Demonstrate proficiency in test automation framework design and implementation
+2. Practice Selenium WebDriver desgin patterns
+3. Automate testing workflows for the WoWUtils raid roster management tool
+
+## Tech Stack
+**Test Framework:** TestNG
+**Build Tool:** Maven
+**Web Automation:** Selenium WebDriver
+**Design Patterns:** Page Object Model, Component Object Pattern, Factory Pattern
+
+## Project Structure
+```
+src/
+├── main/java/com/ryanh/
+│   ├── base/
+│   │   └── BasePage.java           # Base class with reusable wait strategies
+│   ├── components/
+│   │   └── BossCard.java           # Reusable component for boss encounter cards
+│   ├── pages/
+│   │   ├── HomePage.java           # Main navigation page
+│   │   ├── LoginPage.java          # Authentication page
+│   │   └── OverviewPage.java       # Raid overview page
+│   └── utils/
+│       └── DriverFactory.java      # WebDriver factory with browser support
+└── test/java/com/ryanh/
+    ├── base/
+    │   └── BaseTest.java           # Test setup and teardown
+    └── tests/
+        ├── HomeTests.java
+        └── OverviewTests.java      # Data-driven tests with TestNG
+```
