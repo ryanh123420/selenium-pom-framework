@@ -1,10 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="MySuite">
-    <test name="MyTest">
+<suite name="WoWUtils Automation Suite" parallel="false">
+    <test name="Overview Tests">
         <classes>
-            <class name="com.ryanh.tests.HomeTests" />
-            <!-- Add more classes as needed -->
+            <class name="com.ryanh.tests.OverviewTests"/>
         </classes>
     </test>
-    <!-- Add more tests or configurations here -->
 </suite>

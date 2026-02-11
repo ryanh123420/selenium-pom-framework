@@ -9,7 +9,7 @@ public class HomePage extends BasePage {
     private final By assignmentsPageButton = By.cssSelector("#tools a.sm\\:flex");
     private final By setupsPageButton = By.cssSelector("#tools a[href*='setups']");
     private final By battleNetLogin = By.xpath("//img[@alt='Battle.net']/ancestor::button");
-
+    String pageURL = "https://wowutils.com/viserio-cooldowns";
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -17,6 +17,7 @@ public class HomePage extends BasePage {
 
     public void navigateToOverview() {
         click(assignmentsPageButton);
+        waitForPageURL("https://wowutils.com/viserio-cooldowns/raid/overview");
     }
 
     public void navigateToSetups() {
@@ -28,7 +29,6 @@ public class HomePage extends BasePage {
     }
 
     public void waitForPageLoad() {
-        String pageURL = "https://wowutils.com/viserio-cooldowns";
         waitForPageURL(pageURL);
     }
 }
