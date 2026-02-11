@@ -42,10 +42,26 @@ public abstract class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    /**
+     * Waits until the element exists in the DoM.
+     * @param element By locator for an element
+     */
+    protected void waitUntilExists (By element) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(element));
+    }
+
+    /**
+     * Wait for the page URL to be the parameter String
+     * @param url String URL
+     */
     protected void waitForPageURL(String url) {
         wait.until(ExpectedConditions.urlToBe(url));
     }
 
+    /**
+     * Waits for an element to become stale, useful for forced page navigation
+     * @param e
+     */
     protected void waitForStaleElement(WebElement e) {
         wait.until(ExpectedConditions.stalenessOf(e));
     }
