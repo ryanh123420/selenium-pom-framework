@@ -4,6 +4,8 @@ import com.ryanh.base.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
+
 public class BossCard extends BasePage {
     //Root element where the card is located
     private final WebElement root;
@@ -100,6 +102,7 @@ public class BossCard extends BasePage {
     /**
      * Edit a note by clicking the edit button, typing into the input field, then clicking the edit button again to save
      * @param text - text to replace the current note text with
+     * TODO - Make this faster, have to wait for toastNotification to disappear
      */
     public void editNote(String text) {
         //Due to how the tiles work, the element isn't initially present in the DoM until the noteTiles load.
@@ -120,12 +123,18 @@ public class BossCard extends BasePage {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(toastNotification));
     }
 
+    /**
+     * Copies the first note on a card.
+     */
     public void copyNote() {
         wait.until(ExpectedConditions.presenceOfElementLocated(copyNoteButton));
         wait.until(ExpectedConditions.elementToBeClickable(copyNoteButton));
         root.findElement(copyNoteButton).click();
     }
 
+    /**
+     * Deletes one note on a card
+     */
     public void deleteNote() {
         wait.until(ExpectedConditions.presenceOfElementLocated(deleteNoteButton));
         wait.until(ExpectedConditions.elementToBeClickable(deleteNoteButton));
@@ -146,5 +155,23 @@ public class BossCard extends BasePage {
 
     public void openNote() {
         click(noteLink);
+    }
+
+    /**
+     * Clears all notes on a card
+     * TODO - Make this faster, have to wait for toastNotification to disappear
+     */
+    public void clearNotes() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(deleteNoteButton));
+        wait.until(ExpectedConditions.elementToBeClickable(deleteNoteButton));
+        List<WebElement> deleteButtons =  root.findElements(deleteNoteButton);
+
+        for(WebElement button : deleteButtons) {
+            button.click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(deleteAlertWindow));
+            driver.findElement(deleteAlertButton).click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(toastNotification));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(toastNotification));
+        }
     }
 }

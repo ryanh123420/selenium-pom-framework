@@ -79,11 +79,25 @@ public class OverviewTests extends BaseTest{
         }
     }
 
+    /**
+     * Deletes one note from each BossCard
+     */
     @Test(dependsOnMethods = "copyNotes")
     public void deleteNotes() {
         List<BossCard> bossList = overviewPage.getBossCards();
         for(BossCard boss : bossList) {
             boss.deleteNote();
+        }
+    }
+
+    /**
+     * Clears all notes on the Overview page
+     */
+    @Test
+    public void clearAllNotes() {
+        List<BossCard> bossList = overviewPage.getBossCards();
+        for(BossCard boss : bossList) {
+            boss.clearNotes();
         }
     }
 }
