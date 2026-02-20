@@ -1,27 +1,30 @@
 package com.ryanh.tests;
-import com.google.common.base.Verify;
+
 import com.ryanh.base.BaseTest;
 import com.ryanh.components.BossCard;
 import com.ryanh.pages.OverviewPage;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 /**
- * Test scripts for the webapp raid overview page: hhttps://wowutils.com/viserio-cooldowns/raid/overview
+ * Test scripts for the webapp raid overview page: https://wowutils.com/viserio-cooldowns/raid/overview
+ * TODO: Add tests for non-BossCard related actions on the Ovewview page.
  */
-public class OverviewTests extends BaseTest{
+public class OverviewTests extends BaseTest {
     OverviewPage overviewPage;
 
     /**
-     * Boss names for Manaforge Omega raid
+     * Boss names for Manaforge Omega (War Within Season 3)
+     * TODO: Create a DataProvider class if I decide to add more seasons/raids.
+     *  Could also be used on Setups page later.
      */
     @DataProvider(name = "mfoBossList")
     public Object[][] createData1() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Plexus Sentinel"},
                 {"Loom'ithar"},
                 {"Soulbinder Naazindhri"},
@@ -40,9 +43,14 @@ public class OverviewTests extends BaseTest{
         overviewPage.waitForPageLoad();
     }
 
+    @AfterMethod
+    public void cleanNotes() {
+        //Delete all notes after each test?
+    }
+
     /**
-     * Adds one note to every boss card on the overview page
-     * @param bossName
+     * Adds one note to every boss card on the overview page.
+     * @param bossName - Name of a specific boss
      */
     @Test(dataProvider = "mfoBossList")
     public void addNotes(String bossName) {
@@ -53,51 +61,63 @@ public class OverviewTests extends BaseTest{
         driver.navigate().back();
         overviewPage.waitForPageLoad();
 
-        //We need to refresh the boss list due to the navigation to avoid stale elements
+        //Refresh the boss list due to the navigation to avoid stale elements
         BossCard refreshedBoss = overviewPage.getBossByName(bossName);
         Assert.assertTrue(refreshedBoss.isTilePresent());
+
+        refreshedBoss.deleteNote();
     }
 
     /**
-     * Edits the first note on each boss card, runs after addNotes
-     * @param bossName
+     * Edits the first note on each boss card.
+     * @param bossName - Name of a specific boss
      */
-    @Test(dataProvider = "mfoBossList", dependsOnMethods = "addNotes")
+    @Test(dataProvider = "mfoBossList")
     public void editNotes(String bossName) {
         String editedName = "Edited - " + bossName;
         BossCard boss = overviewPage.getBossByName(bossName);
-        boss.editNote(editedName);
 
-        Assert.assertEquals(boss.getNoteName(), editedName);
-    }
+        boss.addNote();
+        driver.navigate().back();
+        overviewPage.waitForPageLoad();
+        BossCard refreshedBoss = overviewPage.getBossByName(bossName);
 
-    @Test(dependsOnMethods = "editNotes")
-    public void copyNotes() {
-        List<BossCard> bossList = overviewPage.getBossCards();
-        for(BossCard boss : bossList) {
-            boss.copyNote();
-        }
-    }
+        refreshedBoss.editNote(editedName);
 
-    /**
-     * Deletes one note from each BossCard
-     */
-    @Test(dependsOnMethods = "copyNotes")
-    public void deleteNotes() {
-        List<BossCard> bossList = overviewPage.getBossCards();
-        for(BossCard boss : bossList) {
-            boss.deleteNote();
-        }
+        Assert.assertEquals(refreshedBoss.getNoteName(), editedName);
+
+        refreshedBoss.deleteNote();
     }
 
     /**
-     * Clears all notes on the Overview page
+     * Copy the first note on each boss card.
+     * @param bossName
      */
-    @Test
+    @Test(dataProvider = "mfoBossList")
+    public void copyNotes(String bossName) {
+        BossCard boss = overviewPage.getBossByName(bossName);
+        int tileAmount = boss.getNumberOfTiles();
+
+        boss.addNote();
+        driver.navigate().back();
+        overviewPage.waitForPageLoad();
+        BossCard refreshedBoss = overviewPage.getBossByName(bossName);
+
+        refreshedBoss.copyNote();
+        Assert.assertTrue(refreshedBoss.getNumberOfTiles() > tileAmount);
+
+        refreshedBoss.clearNotes();
+    }
+
+    /**
+     * Clears all notes on the Overview page.
+     */
+    @Test(enabled = false)
     public void clearAllNotes() {
         List<BossCard> bossList = overviewPage.getBossCards();
-        for(BossCard boss : bossList) {
+        for (BossCard boss : bossList) {
             boss.clearNotes();
         }
     }
 }
+

@@ -32,8 +32,6 @@ public abstract class BaseTest {
         homePage.acceptCookies();
     }
 
-
-
     /**
      * Teardown method for when a test finishes, and we want to close the WebDriver.
      */

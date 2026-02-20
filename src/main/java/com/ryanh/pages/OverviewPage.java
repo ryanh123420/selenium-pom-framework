@@ -7,8 +7,12 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Page where users can see an overview of all created cooldown and assignment notes.
+ * TODO Add additional functionality and locators for changing difficulty, season, personal vs group, etc.
+ */
 public class OverviewPage extends BasePage {
-    //Root element for "BossCard" components found on the overview page
+    //Root element for "BossCard" components found on the overview page.
     private final By bossCards = By.cssSelector("div.flex div.grid div.border:not(.items-center)");
 
     public OverviewPage(WebDriver driver){
@@ -24,8 +28,8 @@ public class OverviewPage extends BasePage {
     }
 
     /**
-     * Get all BossCard objects on the Overview Page, first we find the bossCards selector which is a List of the root
-     * elements for each card, then map those roots to new BossCard objects, then add them to a List of BossCards.
+     * Get all BossCard objects on the Overview Page. Find all the root elements for each BossCard, then map those
+     * roots to new BossCard objects, then convert to a List of BossCards.
      * @return - List of BossCard objects.
      */
     public List<BossCard> getBossCards() {
@@ -35,9 +39,8 @@ public class OverviewPage extends BasePage {
     }
 
     /**
-     * Get a BossCard by a boss name by first calling getBossCards(), then using a stream we filter a BossCard from the
-     * list using the getBossName() method and comparing it to the bossName parameter. Then we findFirst() from the
-     * filter, since we should never have a duplicate card, and if no cards are found, throw an error.
+     * Find a specific BossCard from a list of BossCards. Use a stream to filter a specific boss from the list, then
+     * find the first card since there should never be a duplicate. If no cards are found, throw an error.
      * @param bossName - The name of a specific boss.
      * @return - A specific BossCard.
      */

@@ -1,17 +1,14 @@
-package com.ryanh.automate;
+package com.ryanh.helper;
 
-import com.ryanh.components.BossCard;
 import com.ryanh.pages.HomePage;
 import com.ryanh.pages.LoginPage;
 import com.ryanh.pages.OverviewPage;
 import com.ryanh.utils.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import java.lang.Thread;
 
-import java.lang.management.RuntimeMXBean;
-import java.util.List;
-
-
+/**
+ * Logs me into my test account for debug and manual set up so I don't have to log out of my main account.
+ */
 public class RunWithoutTests {
     public static void main(String[] args) throws InterruptedException {
         WebDriver driver = DriverFactory.createDriver(DriverFactory.BrowserTypes.CHROME);

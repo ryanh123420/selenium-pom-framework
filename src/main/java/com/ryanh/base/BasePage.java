@@ -84,6 +84,9 @@ public abstract class BasePage {
         waitUntilVisible(element).sendKeys(text);
     }
 
+    /**
+     * Accepts the cookies popup when first logging in
+     */
     protected void acceptCookies() {
         wait.until(ExpectedConditions.presenceOfElementLocated(acceptCookies));
         click(acceptCookies);
