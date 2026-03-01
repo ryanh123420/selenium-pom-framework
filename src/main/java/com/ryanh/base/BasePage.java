@@ -24,6 +24,7 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.actions = new Actions(driver);
     }
 
     /**
@@ -64,8 +65,8 @@ public abstract class BasePage {
      * Waits for an element to become stale, useful for forced page navigation
      * @param e
      */
-    protected void waitForStaleElement(WebElement e) {
-        wait.until(ExpectedConditions.stalenessOf(e));
+    protected void waitForStaleElement(WebElement element) {
+        wait.until(ExpectedConditions.stalenessOf(element));
     }
 
     /**

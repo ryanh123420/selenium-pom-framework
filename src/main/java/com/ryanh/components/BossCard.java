@@ -17,9 +17,9 @@ public class BossCard extends BasePage {
      * Selectors for elements on a boss card that are always available regardless on if there are any notes created.
      */
     private final By addNoteButton = By.cssSelector("div.grid div.flex button:not([title]):not(.border)");
-    private final By expandViewButton = By.cssSelector("div.grid div.flex button[title=\"Open full view\"]");
-    private final By bossName = By.cssSelector("div.grid div.flex a[href*=\"/viserio-cooldowns/guides\"] span");
-    private final By bossGuideLink = By.cssSelector("div.grid div.flex a[href*=\"/viserio-cooldowns/guides\"]");
+    private final By expandViewButton = By.cssSelector("div.grid div.flex button[title='Open full view']");
+    private final By bossName = By.cssSelector("div.grid div.flex a[href*='/viserio-cooldowns/guides'] span");
+    private final By bossGuideLink = By.cssSelector("div.grid div.flex a[href*='/viserio-cooldowns/guides']");
 
     //Only available when no notes are created
     private final By createANoteButton = By.xpath(".//button[contains(text(), 'Create a note')]");
