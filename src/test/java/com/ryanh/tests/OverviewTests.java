@@ -109,5 +109,13 @@ public class OverviewTests extends BaseTest {
         boss.openBossGuide();
         Assert.assertEquals(guideURL, driver.getCurrentUrl());
     }
+
+    @Test
+    public void dropdownTest() {
+        overviewPage.clickDropdown("Last Updated");
+        Assert.assertEquals(overviewPage.getSelectedSortOption(), "Last Updated");
+        overviewPage.clickDropdown("Creation Date");
+        Assert.assertEquals(overviewPage.getSelectedSortOption(), "Creation Date");
+    }
 }
 

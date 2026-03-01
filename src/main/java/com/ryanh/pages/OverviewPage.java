@@ -14,6 +14,8 @@ import java.util.NoSuchElementException;
 public class OverviewPage extends BasePage {
     //Root element for "BossCard" components found on the overview page.
     private final By bossCards = By.cssSelector("div.flex div.grid div.border:not(.items-center)");
+    private final By sortingDropdown = By.cssSelector("div.rounded-sm button[role='combobox']");
+    private final By sortingDropdownTable = By.cssSelector("div[role='presentation']");
 
     public OverviewPage(WebDriver driver){
         super(driver);
@@ -43,5 +45,20 @@ public class OverviewPage extends BasePage {
                 .orElseThrow(() ->
                         new NoSuchElementException("Card not found: " + bossName)
                 );
+    }
+
+    public String getSelectedSortOption() {
+        return driver.findElement(sortingDropdown).getText();
+    }
+
+    public void clickDropdown(String option) {
+        waitUntilExists(sortingDropdown);
+        actions.moveToElement(driver.findElement(sortingDropdown))
+                .click()
+                .perform();
+        waitUntilExists(sortingDropdownTable);
+        actions.moveToElement(driver.findElement(By.xpath("//div[@role='option']//span[text()='" + option + "']")))
+                .click()
+                .perform();
     }
 }
