@@ -8,10 +8,10 @@ A Java Selenium test automation framework for the WoWUtils raid management web a
 3. Automate testing workflows for the WoWUtils raid roster management tool
 
 ## Tech Stack
-**Test Framework:** TestNG
-**Build Tool:** Maven
-**Web Automation:** Selenium WebDriver
-**Design Patterns:** Page Object Model, Component Object Pattern, Factory Pattern
+* **Test Framework:** TestNG
+* **Build Tool:** Maven
+* **Web Automation:** Selenium WebDriver
+* **Design Patterns:** Page Object Model, Component Object Pattern, Factory Pattern
 
 ## Project Structure
 ```
