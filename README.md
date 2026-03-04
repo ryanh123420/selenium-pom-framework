@@ -15,23 +15,29 @@ A Java Selenium test automation framework for the WoWUtils raid management web a
 
 ## Project Structure
 ```
-src/
-├── main/java/com/ryanh/
-│   ├── base/
-│   │   └── BasePage.java           # Base class with reusable wait strategies
-│   ├── components/
-│   │   ├── BossCard.java           # Reusable component for boss encounter cards
-│   │   └── NoteTile.java           # Component for individual note tiles on a BossCard
-│   ├── pages/
-│   │   ├── HomePage.java           # Main navigation page
-│   │   ├── LoginPage.java          # Authentication page
-│   │   └── OverviewPage.java       # Raid overview page
-│   └── utils/
-│       └── DriverFactory.java      # WebDriver factory with browser support
-└── test/java/com/ryanh/
-    ├── base/
-    │   └── BaseTest.java           # Test setup and teardown
-    └── tests/
-        ├── HomeTests.java
-        └── OverviewTests.java      # Data-driven tests with TestNG
+  src/
+  ├── main/java/com/ryanh/
+  │   ├── base/
+  │   │   └── BasePage.java                     # Base class with reusable wait strategies
+  │   ├── components/
+  │   │   ├── BossCard.java                     # Reusable component for boss encounter cards
+  │   │   └── NoteTile.java                     # Component for individual note tiles on a BossCard
+  │   ├── helper/
+  │   │   └── RunWithoutTests.java              # Helper class for debugging
+  │   ├── pages/
+  │   │   ├── HomePage.java                     # Main navigation page
+  │   │   ├── LoginPage.java                    # Authentication page
+  │   │   └── OverviewPage.java                 # Raid overview page
+  │   └── utils/
+  │       └── DriverFactory.java                # WebDriver factory with browser support
+  └── test/java/
+      ├── com/ryanh/
+      │   ├── base/
+      │   │   └── BaseTest.java                 # Test setup and teardown
+      │   └── tests/
+      │       ├── HomeTests.java                
+      │       ├── OverviewTests.java            # Data-driven tests with TestNG
+      │       └── data/
+      │           └── BossDataProviders.java    # DataProviders for test case parameters
+      └── testng.xml
 ```
