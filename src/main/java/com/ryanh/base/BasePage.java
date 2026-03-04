@@ -21,7 +21,7 @@ public abstract class BasePage {
 
     private final By acceptCookies = By.cssSelector("div.cky-consent-container button.cky-btn-accept");
 
-    public BasePage(WebDriver driver) {
+    protected BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.actions = new Actions(driver);
@@ -63,7 +63,7 @@ public abstract class BasePage {
 
     /**
      * Waits for an element to become stale, useful for forced page navigation
-     * @param e
+     * @param element By locator for an element
      */
     protected void waitForStaleElement(WebElement element) {
         wait.until(ExpectedConditions.stalenessOf(element));
@@ -88,7 +88,7 @@ public abstract class BasePage {
     /**
      * Accepts the cookies popup when first logging in
      */
-    protected void acceptCookies() {
+    public void acceptCookies() {
         wait.until(ExpectedConditions.presenceOfElementLocated(acceptCookies));
         click(acceptCookies);
     }

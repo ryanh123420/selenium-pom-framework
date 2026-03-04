@@ -16,7 +16,7 @@ import java.util.List;
  * TODO: Add tests for non-BossCard related actions on the Ovewview page.
  */
 public class OverviewTests extends BaseTest {
-    OverviewPage overviewPage;
+    private OverviewPage overviewPage;
 
     /**
      * Boss names for Manaforge Omega (War Within Season 3)
