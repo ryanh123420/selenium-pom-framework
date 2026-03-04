@@ -15,7 +15,7 @@ public class HomeTests extends BaseTest {
      * URL: https://wowutils.com/viserio-cooldowns/raid/overview
      */
     @Test
-    public void NavigateToOverview(){
+    public void NavigateToOverview() {
         HomePage homePage = new HomePage(driver);
         driver.get("https://wowutils.com/viserio-cooldowns");
 
