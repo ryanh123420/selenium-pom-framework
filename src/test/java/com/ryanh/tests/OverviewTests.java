@@ -21,6 +21,8 @@ public class OverviewTests extends BaseTest {
     public void overViewSetup() {
         overviewPage = new OverviewPage(driver);
         driver.get("https://wowutils.com/viserio-cooldowns/raid/overview");
+        overviewPage.showPersonalNotes();
+        Assert.assertEquals(overviewPage.getSelectedGroupOption(), "Personal");
     }
 
     @AfterMethod
@@ -92,9 +94,9 @@ public class OverviewTests extends BaseTest {
 
     @Test
     public void dropdownTest() {
-        overviewPage.clickDropdown("Last Updated");
+        overviewPage.clickSortDropdown("Last Updated");
         Assert.assertEquals(overviewPage.getSelectedSortOption(), "Last Updated");
-        overviewPage.clickDropdown("Creation Date");
+        overviewPage.clickSortDropdown("Creation Date");
         Assert.assertEquals(overviewPage.getSelectedSortOption(), "Creation Date");
     }
 }

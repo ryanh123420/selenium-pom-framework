@@ -16,6 +16,8 @@ public class OverviewPage extends BasePage {
     private final By bossCards = By.cssSelector("div.flex div.grid div.border:not(.items-center)");
     private final By sortingDropdown = By.cssSelector("div.rounded-sm button[role='combobox']");
     private final By sortingDropdownTable = By.cssSelector("div[role='presentation']");
+    private final By personalNotes = By.xpath("//button[contains(text(), 'Personal')]");
+    private final By groupNotes = By.xpath("//button[contains(text(), 'Group')]");
 
     public OverviewPage(WebDriver driver){
         super(driver);
@@ -51,7 +53,7 @@ public class OverviewPage extends BasePage {
         return driver.findElement(sortingDropdown).getText();
     }
 
-    public void clickDropdown(String option) {
+    public void clickSortDropdown(String option) {
         waitUntilExists(sortingDropdown);
         actions.moveToElement(driver.findElement(sortingDropdown))
                 .click()
@@ -60,5 +62,26 @@ public class OverviewPage extends BasePage {
         actions.moveToElement(driver.findElement(By.xpath("//div[@role='option']//span[text()='" + option + "']")))
                 .click()
                 .perform();
+    }
+
+    public void showPersonalNotes() {
+        click(personalNotes);
+    }
+
+    public void showGroupNotes() {
+        click(groupNotes);
+    }
+
+    public String getSelectedGroupOption() {
+        String personalNotesState = driver.findElement(personalNotes).getAttribute("data-state");
+        String groupNotesState = driver.findElement(groupNotes).getAttribute("data-state");
+
+        if(personalNotesState.equals("active")){
+            return "Personal";
+        }
+        else if(groupNotesState.equals("active")){
+            return "Group";
+        }
+        return "none";
     }
 }
