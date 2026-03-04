@@ -46,10 +46,6 @@ public class BossCard extends BasePage {
         return root.findElement(bossName).getText();
     }
 
-    public WebElement getRootElement() {
-        return root;
-    }
-
     /**
      * Add a note by clicking the add button, when a note is added the page automatically navigates to that
      * notes editing page. Wait for the locator reference to become stale since we navigate to a different page.
