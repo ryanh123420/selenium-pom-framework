@@ -30,8 +30,9 @@ public class BossCard extends BasePage {
     /**
      * When a BossCard is created, we set the root element so we can differentiate between different BossCards on the
      * Overview Page.
+     *
      * @param driver - WebDriver
-     * @param root - Root element on the Overview page
+     * @param root   - Root element on the Overview page
      */
     public BossCard(WebDriver driver, WebElement root) {
         super(driver);
@@ -40,6 +41,7 @@ public class BossCard extends BasePage {
 
     /**
      * Returns the name of a boss by checking the text of the boss guide link for that boss.
+     *
      * @return - Text wrapped around the link href
      */
     public String getBossName() {
@@ -57,6 +59,18 @@ public class BossCard extends BasePage {
         waitUntilVisible(addNoteButton);
     }
 
+    /**
+     * Similar functionality to addNote but has to be handled differently due to the button only appearing when
+     * there are no notes.
+     */
+    public void createNote() {
+        waitUntilExists(createANoteButton);
+        root.findElement(createANoteButton).click();
+        waitForStaleElement(root.findElement(createANoteButton));
+        driver.navigate().back();
+        waitUntilExists(bossName);
+    }
+
     public void openBossGuide() {
         root.findElement(bossGuideLink).click();
         waitForPageURL(getGuideURL());
@@ -64,6 +78,7 @@ public class BossCard extends BasePage {
 
     /**
      * Checks that the note table contains a note for a BossCard.
+     *
      * @return - True if a note exists in the table, false if there are none.
      */
     public boolean isTilePresent() {
@@ -73,6 +88,7 @@ public class BossCard extends BasePage {
 
     /**
      * Get the number of note tiles on a card.
+     *
      * @return - The number of tiles.
      */
     public int getNumberOfTiles() {
@@ -81,6 +97,7 @@ public class BossCard extends BasePage {
 
     /**
      * Returns all NoteTile components on this card.
+     *
      * @return - List of NoteTile instances scoped to each tile element.
      */
     public List<NoteTile> getNoteTiles() {
@@ -93,6 +110,7 @@ public class BossCard extends BasePage {
 
     /**
      * Returns the first NoteTile on this card.
+     *
      * @return - The first NoteTile.
      * @throws NoSuchElementException if no tiles exist.
      */

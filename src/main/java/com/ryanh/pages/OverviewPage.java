@@ -49,6 +49,10 @@ public class OverviewPage extends BasePage {
                 );
     }
 
+    /**
+     * Returns the sorting option selected, either 
+     * @return
+     */
     public String getSelectedSortOption() {
         return driver.findElement(sortingDropdown).getText();
     }

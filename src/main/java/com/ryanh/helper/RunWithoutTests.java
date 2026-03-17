@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
  * Logs me into my test account for debug and manual set up so I don't have to log out of my main account.
  */
 public class RunWithoutTests {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         WebDriver driver = DriverFactory.createDriver(DriverFactory.BrowserTypes.CHROME);
 
         driver.get("https://wowutils.com/viserio-cooldowns");
