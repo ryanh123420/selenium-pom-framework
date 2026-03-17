@@ -10,6 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+
 /**
  * Test scripts for the webapp raid overview page: https://wowutils.com/viserio-cooldowns/raid/overview
  * TODO: Add tests for non-BossCard related actions on the Overview page.
@@ -38,6 +40,22 @@ public class OverviewTests extends BaseTest {
     public void addNotes(String bossName) {
         BossCard boss = overviewPage.getBossByName(bossName);
         boss.addNote();
+
+        //Refresh the boss list due to the navigation to avoid stale elements
+        BossCard refreshedBoss = overviewPage.getBossByName(bossName);
+        Assert.assertTrue(refreshedBoss.isTilePresent());
+
+        refreshedBoss.getFirstNoteTile().delete();
+    }
+
+    /**
+     * Adds one note to every boss card on the overview page via the "Create Note" button.
+     * @param bossName - Name of a specific boss
+     */
+    @Test(dataProvider = "MidnightSeason1", dataProviderClass = BossDataProviders.class)
+    public void createNotes(String bossName) {
+        BossCard boss = overviewPage.getBossByName(bossName);
+        boss.createNote();
 
         //Refresh the boss list due to the navigation to avoid stale elements
         BossCard refreshedBoss = overviewPage.getBossByName(bossName);

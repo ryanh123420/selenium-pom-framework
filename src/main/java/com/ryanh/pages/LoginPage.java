@@ -19,5 +19,6 @@ public class LoginPage extends BasePage {
         click(loginButton);
         type(passwordField, password);
         click(loginButton);
+        waitForPageURL("https://wowutils.com/viserio-cooldowns");
     }
 }
