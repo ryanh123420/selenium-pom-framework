@@ -10,9 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 public class NoteTile extends BasePage {
     private final WebElement root;
-
-    private final By editNoteNameButton = By.cssSelector("button[title='Edit note name']");
-    private final By editNoteTextFieldInput = By.cssSelector("div.grid div.flex input");
     private final By copyNoteButton = By.cssSelector("div.grid div.flex button[title*='Copy this note']");
     private final By deleteNoteButton = By.cssSelector("div.grid div.flex button[title*='Delete note']");
     private final By deleteAlertWindow = By.cssSelector("div[role='alertdialog']");
@@ -24,26 +21,6 @@ public class NoteTile extends BasePage {
     public NoteTile(WebDriver driver, WebElement root) {
         super(driver);
         this.root = root;
-    }
-
-    /**
-     * Edit the note name by clicking the edit button, typing into the input field, then clicking the edit button again.
-     * @param text - text to replace the current note name with
-     * TODO - Make this faster, have to wait for toastNotification to disappear
-     */
-    public void edit(String text) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(editNoteNameButton));
-        root.findElement(editNoteNameButton).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(editNoteTextFieldInput));
-        WebElement textField = root.findElement(editNoteTextFieldInput);
-
-        textField.sendKeys(Keys.CONTROL + "a");
-        textField.sendKeys(Keys.DELETE);
-        textField.sendKeys(text);
-        root.findElement(editNoteNameButton).click();
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(toastNotification));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(toastNotification));
     }
 
     /**

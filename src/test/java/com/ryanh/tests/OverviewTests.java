@@ -65,26 +65,6 @@ public class OverviewTests extends BaseTest {
     }
 
     /**
-     * Edits the first note on each boss card.
-     * @param bossName - Name of a specific boss
-     */
-    @Test(dataProvider = "MidnightSeason1", dataProviderClass = BossDataProviders.class)
-    public void editNotes(String bossName) {
-        String editedName = "Edited - " + bossName;
-        BossCard boss = overviewPage.getBossByName(bossName);
-
-        boss.addNote();
-        BossCard refreshedBoss = overviewPage.getBossByName(bossName);
-
-        NoteTile tile = refreshedBoss.getFirstNoteTile();
-        tile.edit(editedName);
-
-        Assert.assertEquals(tile.getName(), editedName);
-
-        tile.delete();
-    }
-
-    /**
      * Copy the first note on each boss card.
      * @param bossName - Name of a specific boss
      */
